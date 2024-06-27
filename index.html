@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Imagens</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="gallery"></div>
+    </div>
+
+    <script>
+        const folderPath = 'bebelas'; // Certifique-se de que o caminho está correto
+        const galleryContainer = document.getElementById('gallery');
+
+        fetchImages();
+
+        async function fetchImages() {
+            try {
+                const response = await fetch(folderPath);
+                const images = await response.json();
+
+                images.forEach(img => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img;
+                    galleryContainer.appendChild(imgElement);
+                });
+            } catch (error) {
+                console.error('Erro ao buscar imagens:', error);
+            }
+        }
+    </script>
+</body>
+</html>
